@@ -1,0 +1,52 @@
+Introduction
+	Ansible Concepts
+	Ansible Tower Concepts
+Installation
+	Ansible Installation
+	Ansible Installation using Vagrant
+	Ansible Plugin for VSCode
+Managing Linux Servers
+	Execute ad-hoc commands
+Managing Windows Servers
+	Prepare Basic Account
+	Adding Windows Server to Ansible Hosts
+	Configuring Windows Server Variables for winrm
+	Setting up WinRM Basic Authentication
+	Testing WinRM using win_ping
+	Run PowerShell code remotely on Windows
+	Run a PowerShell script remotely on Windows
+	Install notepad++ on windows using the chocolatey module
+	Add Audit rules to files or folders on Windows using Ansible
+	Install a pfx Certificate on Windows using Ansible
+	Install IIS with Ansible
+	Setup Windows Firewall with Ansible
+	Set Windows Region, Date and Timezone settings with Ansible
+	Install Patches on Windows with Ansible
+Ansible Tower Installation
+	Quick Tower Install using Vagrant and Virtualbox
+	Ansible Tower Installation
+	Ansible AWX Installation
+Ansible Tower Resources Menu
+	Templates
+	Credentials
+	Projects
+	Inventories
+	Inventory Scripts
+Ansible Tower Access Menu
+	Organizations
+	Users
+	Teams
+Ansible Tower Administration Menu
+	Credential Types
+	Notifications
+	Management Jobs
+	Instance Groups
+	Applications
+	Settings	
+Automating the Automation API
+	Talking to the Ansible Tower API with Postman
+	Talking to the Ansible Tower API with Curl
+	Talking to the Ansible Tower API PowerShell
+
+
+- Encrypted Credentials not retrievable

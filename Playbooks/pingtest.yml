@@ -1,0 +1,4 @@
+- hosts: win
+  tasks:
+    - win_ping:
+        data: pong # not required. Alternate data to return instead of 'pong'.,If this parameter is set to C(crash), the module will cause an exception.

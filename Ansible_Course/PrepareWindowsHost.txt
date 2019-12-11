@@ -1,0 +1,112 @@
+-Enable Remote Desktop
+
+$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
+
+(New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
+
+powershell.exe -ExecutionPolicy ByPass -File $file
+
+winrm get winrm/config/service/auth
+winrm get winrm/config/service
+
+winrm set winrm/config/service/auth '@{Basic="true"}'
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+
+[windows]
+loldc1.laboflabs.lab
+
+[windows:vars]
+ansible_user: administrator
+ansible_password: 
+ansible_port: 5985
+ansible_connection: winrm
+ansible_winrm_cert_validation: ignore
+
+#PasswordAuthentication yes
+
+#install authorized keys ask pass
+ansible-playbook -i /var/lib/awx/projects/AutomationProject/inventory /var/lib/awx/projects/AutomationProject/Playbooks/pinglinux.yml --ask-pass
+
+https://medium.com/@visualskyrim/ansible-playbook-deploy-the-public-key-to-remote-hosts-da3f3b4b5481
+
+#organizing host and group variables
+#using ansible vault on variables
+https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#using-multiple-inventory-sources
+#ssh commands
+https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#connecting-to-hosts-behavioral-inventory-parameters
+
+If you would like a GUI for handling dynamic inventory, the Red Hat Ansible Tower inventory database syncs with all your dynamic inventory sources, provides web and REST access to the results, and offers a graphical inventory editor. With a database record of all of your hosts, you can correlate past event history and see which hosts have had failures on their last playbook runs.
+
+Look into Cobbler and Ansible
+
+You can use the inventory script explicitly (by passing the -i openstack_inventory.py argument to Ansible) or implicitly (by placing the script at /etc/ansible/hosts).
+
+root@awx1:/var/lib/awx/projects/AutomationProject#  ansible win --list-hosts
+  hosts (2):
+    loldc1.laboflabs.lab
+    192.168.2.21
+
+https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html#static-groups-of-dynamic-groups
+
+https://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html#common-patterns
+
+https://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html#using-group-position-in-patterns
+
+By default Ansible uses only 5 simultaneous processes. If you have more hosts than the value set for the fork count, Ansible will talk to them, but it will take a little longer. To reboot the [atlanta] servers with 10 parallel forks:
+
+$ ansible atlanta -a "/sbin/reboot" -f 10
+
+https://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html#managing-files
+
+https://docs.ansible.com/ansible/latest/user_guide/connection_details.html#host-key-checking
+
+#Snippets
+ansible-doc --list | grep win
+ansible-doc win_service -s
+
+Ansible Pull
+
+If the action line is getting too long for comfort you can break it on a space and indent any continuation lines:
+
+tasks:
+  - name: Copy ansible inventory file to client
+    copy: src=/etc/ansible/hosts dest=/etc/ansible/hosts
+            owner=root group=root mode=0644
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#handlers-running-operations-on-change
+
+#Ansible Lint 403 Error
+https://github.com/ansible/ansible-lint/issues/479
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse.html#dynamic-vs-static
+If you use any include* Task (include_tasks, include_role, etc.), it will be dynamic. If you use any import* Task (import_playbook, import_tasks, etc.), it will be static.
+
+All import* statements are pre-processed at the time playbooks are parsed.
+All include* statements are processed as they are encountered during the execution of the playbook.
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_includes.html#importing-playbooks
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#ansible-variable-precedence
+
+ansible_facts / os_family? 
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#using-roles
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#role-duplication-and-execution
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#role-dependencies
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#caching-facts
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#registering-variables
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#accessing-information-about-other-hosts-with-magic-variables
+
+
+
+
+
+
+
+

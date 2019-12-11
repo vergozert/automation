@@ -1,0 +1,58 @@
+﻿<#Param(
+    [Parameter(Mandatory=$true)][String]$FirstName,
+    [Parameter(Mandatory=$true)][String]$LastName,
+    [Parameter][String]$Location
+)
+#>
+
+#Runbook ontvangt variabelen als JSON
+#Runbook dynamisch opgebouwd d.m.v. powershell
+
+#AzureVariable to ADProperty
+
+$FirstName = "Voornaam"
+$LastName = "van Achternaam-Aangetrouwdenaam"
+
+$vars = @"
+{
+  "extra_vars": {
+    "VAR_FIRSTNAME": "$($FirstName)",
+    "VAR_LASTNAME": "$($LastName)"
+  }
+}
+"@
+
+
+
+#SHI
+write-host SHI -ForegroundColor Yellow
+$ConventionUPN = "$($FirstName).$($LastName.Replace(' ',''))"
+$ConventionSamAccountName = "$(($Firstname).Substring(0,1)).$($LastName.Replace(' ',''))" #Notitie: what to do bij zelfde naamopbouw Henri van der velden = hvandervelden || henk van der velden ?
+$ConventionDisplayName = "$($FirstName) $($LastName)"
+
+$ConventionUPN
+$ConventionSamAccountName
+$ConventionDisplayName
+
+#WNP
+write-host WNP -ForegroundColor Yellow
+$ConventionUPN = "$(($Firstname).Substring(0,1)).$($LastName.Replace(' ','').Split('-') | select -First 1)"
+$ConventionSamAccountName = "$(($Firstname).Substring(0,1)).$($LastName.Replace(' ','').Split('-') | select -First 1)" #Notitie: what to do bij zelfde naamopbouw Henri van der velden = hvandervelden || henk van der velden ?
+$ConventionDisplayName = "$($LastName), $($FirstName)"
+$ConventionUPN
+$ConventionSamAccountName
+$ConventionDisplayName
+
+#VAL
+write-host VAL -ForegroundColor Yellow
+$ConventionUPN =
+"$($Firstname).$($LastName.Replace(' ','.'))"
+$ConventionSamAccountName = "$(($Firstname).Substring(0,1)).$($LastName.Replace(' ','').Split('-') | select -First 1)" #Notitie: what to do bij zelfde naamopbouw Henri van der velden = hvandervelden || henk van der velden ?
+$ConventionDisplayName = "$($FirstName) $($LastName)"
+$ConventionUPN
+$ConventionSamAccountName
+$ConventionDisplayName
+
+$SamAccountName
+$EmailAddress
+#Valid

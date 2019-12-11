@@ -1,0 +1,12 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  #config.vm.provision "shell", inline: "echo Hello"
+  
+  config.vm.define "server16" do |server16|
+  server16.vm.box = "salesforce/server2016"
+  server16.vm.network "public_network", bridge: "Intel(R) Ethernet Connection (4) I219-V"
+  end
+
+end

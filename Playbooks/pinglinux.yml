@@ -1,0 +1,8 @@
+- hosts: lin
+  tasks:
+    - authorized_key:
+        user: root # required. The username on the remote host whose authorized_keys file will be modified
+        key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDmq+KysvBiaCqZj6Bp81h3OhoEPBdakr5GMUQHOKsoyr+fFKpn1DWpJw+BvS40hUzL7Ew004mBHk1EL3ibjNkJej0/RS+YvPTENRUWqCRc/XZuu/F3ej6eeRZWt2a+U0LQQkJvR9ej/yA9RFGgkoZenu5Wj5i3DodP0JdJ95WJAgLyRlH2Tr1lKAx9ne93NjfOYtclm4ooJD0R1qGL7CgelKuerQHSRWSMVCH9gBdURKBKeMdzG+qkNMU2JAPePAx+F/FG40rwx8fCYnpf/CGeAwkEoBLTbp9nCJ7ybm7vf6EeDFwx9uI8t6ZOM+PPn06Hi5//61X4/0fGXtAujWkQsC3kax8A3aK4XH27xg2kKppZM88jONeYHor5T2oUCUhJKXX3UUHLfoCyecve/MUHWydpGFdujPHfSFWkrVs2rHm2QhYZoBYFsqtaoQbykulNVFntVaoerugH4yimPlVZGguczD/By7o7fl/XtJkp5AbsW5PhuzWXXcjjtgWh5qE= root@awx1' # required. The SSH public key(s), as a string or (since 1.9) url (https://github.com/username.keys)
+        state: present # not required. choices: present;absent. Whether the given key (with the given key_options) should or should not be in the file
+    - ping:
+        data: pong # not required. Alternate data to return instead of 'pong'.,If this parameter is set to C(crash), the module will cause an exception.

@@ -1,0 +1,17 @@
+---
+- hosts: web
+  handlers:
+        - name: restart memcached
+          service:
+                name: memcached
+                state: restarted
+                listen: "restart web services"
+        - name: restart web services
+          service:
+                name: "{{ web_service_name | default('httpd') }}"
+                state: restarted
+
+  tasks:
+    - name: restart everything
+      command: echo "this task will restart the web services"
+      notify: "restart web services"

@@ -1,0 +1,48 @@
+---
+- hosts: web
+  tasks:
+  - name: Creates directory for web files
+    file: path=/var/www/html state=directory
+
+  #- name: Download WordPress
+    #get_url: url=http://wordpress.org/latest.tar.gz dest=/var/www/html/wordpress.tar.gz force=yes
+
+  - name: Extract archive
+    unarchive: src=/var/www/html/wordpress.tar.gz dest=/var/www/html/ copy=no creates=/var/www/html/wordpress
+
+  - name: Add group "wordpress"
+    group: name=wordpress
+
+  - name: Add user "wordpress"
+    user: name=wordpress group=wordpress home=/var/www/html/wordpress/
+
+  - name: Fetch random salts for WordPress config
+    local_action: command curl https://api.wordpress.org/secret-key/1.1/salt/
+    register: "wp_salt"
+    sudo: no
+
+  - name: Make sure pymysql is present
+    become: true # needed if the other tasks are not played as root
+    pip:
+     name: pymysql
+     state: present
+
+  - name: Create WordPress database
+    mysql_db: login_user=root login_password='' name=wordpress state=present
+
+  - name: Create WordPress database user
+    mysql_user: name=wordpress password=wordpress priv=wordpress.*:ALL host='localhost' state=present
+
+#templates
+#https://github.com/tlovett1/wordpress-ansible-playbook/blob/master/roles/wordpress/tasks/main.yml
+  - name: Download WP-CLI
+    get_url: url=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar dest=/tmp/wp-cli.phar
+
+  - name: Add WP-CLI to bin
+    command: mv /tmp/wp-cli.phar /usr/local/bin/wp creates=/usr/local/bin/wp
+
+  - name: Make WP-CLI executable
+    file: path=/usr/local/bin/wp owner={{remote_user}} group=wordpress mode=770
+
+  - name: Start php-fpm Service
+    service: name=php7.0-fpm state=started enabled=yes

@@ -1,0 +1,15 @@
+- hosts: all
+  tasks:
+  - name: Gather only registered virtual machine templates
+    vmware_vm_facts:
+        validate_certs: no # not required. Allows connection when SSL certificates are not valid. Set to C(false) when certificates are not trusted.,If the value is not specified in the task, the
+        hostname: vcsa.laboflabs.lab
+        username: administrator@laboflabs.lab
+        password: 'Freemind05!!'
+        vm_type: vm
+    delegate_to: localhost
+    register: template_facts
+
+
+  - debug:
+     var: template_facts.virtual_machines
