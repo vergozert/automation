@@ -13,5 +13,5 @@
             "copyOnSave": true
         },
     ],
-    "ansible.customOptions": "-i /var/lib/awx/projects/AutomationProject/inventory"
+    "ansible.customOptions": "-i /etc/ansible/hosts"
 }

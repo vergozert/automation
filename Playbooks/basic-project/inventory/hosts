@@ -1,8 +1,5 @@
 [win]
 loldc1.laboflabs.lab
-192.168.2.21
-#lolvbr1.laboflabs.lab
-#lol1w10.laboflabs.lab
 
 [win:vars]
 ansible_user= administrator
@@ -12,13 +9,9 @@ ansible_connection= winrm
 #ansible_winrm_cert_validation= ignore
 
 [lin]
-192.168.2.7[0:3]
-#192.168.2.70
-#192.168.2.71
-#192.168.2.72
-
-[web]
-192.168.2.70
+web ansible_host=192.168.2.70
+db ansible_host=192.168.2.71
+app ansible_host=192.168.2.72
 
 [lin:vars]
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
