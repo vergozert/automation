@@ -2,16 +2,16 @@
     "ansible.fileCopyConfig": [
         {
             "server": "192.168.2.17",
-            "sourcePath": "c:\\Users\\rvergoossen\\stack\\PowerShell\\_VALID\\InProgress\\AutomationTeam\\Azure_Automation\\AutomationProject/",
+            "sourcePath": "c:\\Users\\rvergoossen\\stack\\PowerShell\\_VALID\\InProgress\\AutomationTeam\\Azure_Automation\\automation/",
             "targetPath": "/var/lib/awx/projects/AutomationProject/",
             "copyOnSave": true
         },
-                {
-                    "server": "192.168.2.17",
-                    "sourcePath": "c:\\Users\\rvergoossen\\stack\\PowerShell\\_VALID\\InProgress\\AutomationTeam\\Azure_Automation\\AutomationProject/inventory",
-                    "targetPath": "/etc/ansible/hosts",
-                    "copyOnSave": true
-                },
+        {
+            "server": "192.168.2.17",
+            "sourcePath": "c:\\Users\\rvergoossen\\stack\\PowerShell\\_VALID\\InProgress\\AutomationTeam\\Azure_Automation\\automation/inventory",
+            "targetPath": "/etc/ansible/hosts",
+            "copyOnSave": true
+        },
     ],
     "ansible.customOptions": "-i /var/lib/awx/projects/AutomationProject/inventory"
 }

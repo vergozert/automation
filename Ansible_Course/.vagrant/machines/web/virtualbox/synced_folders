@@ -1,1 +1,1 @@
-{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"C:/Users/rvergoossen/stack/PowerShell/_VALID/InProgress/@_!Ansible_Cursus","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"C:/Users/rvergoossen/stack/PowerShell/_VALID/InProgress/AutomationTeam/Azure_Automation/automation/Ansible_Course","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
